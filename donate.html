@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - My NGO Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        /* Specific styles for donation page elements not in style.css */
+
+        /* Donation Package Card Styling */
+        .package-card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem; /* 12px */
+            padding: 1.5rem; /* 24px */
+            text-align: center;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 4px 8px */
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .package-card:hover {
+            transform: translateY(-0.3125rem); /* 5px */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* 8px 16px */
+             border-color: #FF6F00;
+        }
+         .package-card.selected {
+            border-color: #FF6F00;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+             background-color: #FFF3E0;
+        }
+
+        .package-amount {
+            font-size: 2rem; /* Adjusted for mobile */
+            font-weight: 700;
+            color: #FF6F00;
+            margin-bottom: 0.5rem; /* 8px */
+        }
+         .package-description {
+             font-size: 0.9rem; /* Adjusted for mobile */
+             color: #4A4A4A;
+             margin-bottom: 0.25rem; /* 4px */
+         }
+         .package-duration {
+             font-size: 0.75rem; /* Adjusted for mobile */
+             color: #607D8B;
+             font-weight: 500;
+         }
+
+
+        /* Donation Amount Buttons (in the form) */
+        .amount-button {
+            padding: 0.75rem 1.25rem; /* 12px 20px */
+            border: 2px solid #FFB74D;
+            border-radius: 0.5rem; /* 8px */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #FFFFFF;
+            color: #4A4A4A;
+            font-weight: 500;
+            box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1); /* 1px 3px */
+            font-size: 0.95rem; /* Adjusted for mobile */
+        }
+        .amount-button.selected {
+            background-color: #FF6F00;
+            color: white;
+            border-color: #FF6F00;
+            box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2); /* 2px 6px */
+        }
+         .amount-button:hover:not(.selected) {
+            border-color: #FF6F00;
+            color: #FF6F00;
+            background-color: #FFF3E0;
+        }
+
+         /* Form Input Styling */
+         #donate-form input[type="text"],
+         #donate-form input[type="email"],
+         #donate-form input[type="tel"],
+         #donate-form input[type="number"],
+         #donate-form textarea {
+             background-color: #FFFFFF;
+             border: 1px solid #B0BEC5;
+             color: #4A4A4A;
+             padding: 0.625rem; /* 10px */
+             border-radius: 0.25rem; /* 4px */
+             box-shadow: inset 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1); /* 1px 3px */
+             font-size: 1rem; /* Base font size for inputs */
+         }
+         #donate-form input[type="text"]:focus,
+         #donate-form input[type="email"]:focus,
+         #donate-form input[type="tel"]:focus,
+         #donate-form input[type="number"]:focus,
+         #donate-form textarea:focus {
+             border-color: #4FC3F7;
+             box-shadow: 0 0 0 0.125rem rgba(79, 195, 247, 0.3); /* 2px */
+             background-color: #FFFFFF;
+             color: #333;
+         }
+         #donate-form label {
+             color: #607D8B;
+             font-weight: 500;
+             font-size: 0.875rem; /* 14px */
+         }
+
+
+         /* Submit Button Styling (on the form) */
+         #donate-form button[type="submit"] {
+             background: linear-gradient(to right, #1A237E, #303F9F);
+             color: white;
+             font-weight: 700;
+             padding: 0.875rem 1.75rem; /* 14px 28px */
+             border-radius: 0.5rem; /* 8px */
+             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+             transition: all 0.3s ease-in-out;
+             font-size: 1.125rem; /* 18px */
+         }
+          #donate-form button[type="submit"]:hover {
+              background: linear-gradient(to right, #303F9F, #1A237E);
+              box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.3);
+              transform: translateY(-0.125rem);
+          }
+
+        /* Payment Modal Styling */
+        .payment-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .payment-modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .payment-modal-content {
+            background-color: #FFFFFF;
+            padding: 1.5rem; /* 24px */
+            border-radius: 0.75rem; /* 12px */
+            max-width: 90%; /* Responsive max-width */
+            width: 100%;
+            box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.3); /* 10px 20px */
+            text-align: center;
+            position: relative;
+            transform: translateY(-1.25rem); /* 20px */
+            transition: transform 0.3s ease;
+        }
+         .payment-modal-overlay.visible .payment-modal-content {
+             transform: translateY(0);
+         }
+
+
+        .modal-close-button {
+            position: absolute;
+            top: 0.625rem; /* 10px */
+            right: 0.625rem; /* 10px */
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .modal-close-button:hover {
+            color: #777;
+        }
+
+        .modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem; /* Adjusted for mobile */
+            font-weight: 700;
+            color: #1A237E;
+            margin-bottom: 1rem; /* 16px */
+        }
+
+        .modal-qr-code img {
+            display: block;
+            margin: 0 auto 1rem auto; /* 16px */
+            max-width: 100%; /* Ensure QR image is responsive */
+            width: 10rem; /* 160px base size */
+            height: auto;
+            border: 0.3125rem solid #F0F4F8; /* 5px */
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1); /* 2px 5px */
+        }
+
+        .modal-bank-details {
+            background-color: #E3F2FD;
+            padding: 1rem; /* 16px */
+            border-radius: 0.5rem; /* 8px */
+            margin-bottom: 1rem; /* 16px */
+            text-align: left;
+        }
+        .modal-bank-details h4 {
+             font-size: 1rem; /* Adjusted for mobile */
+             font-weight: 600;
+             color: #1A237E;
+             margin-bottom: 0.625rem; /* 10px */
+        }
+         .modal-bank-details p {
+             font-size: 0.875rem; /* 14px */
+             color: #4A4A4A;
+             line-height: 1.4;
+         }
+
+        .modal-amount-to-pay {
+            font-size: 1.25rem; /* Adjusted for mobile */
+            font-weight: 700;
+            color: #FF6F00;
+            margin-bottom: 1rem; /* 16px */
+        }
+
+        .modal-payment-confirm-button {
+             background: linear-gradient(to right, #66BB6A, #81C784);
+             color: white;
+             font-weight: 700;
+             padding: 0.75rem 1.5rem; /* 12px 24px */
+             border-radius: 0.5rem; /* 8px */
+             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+             transition: all 0.3s ease-in-out;
+             cursor: pointer;
+             border: none;
+             display: inline-block;
+             margin-top: 0.75rem; /* 12px */
+             font-size: 1rem; /* Adjusted */
+        }
+         .modal-payment-confirm-button:hover {
+              background: linear-gradient(to right, #81C784, #66BB6A);
+              box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.3);
+              transform: translateY(-0.125rem);
+         }
+
+        /* Media Queries for Modal */
+        @media (min-width: 768px) {
+            .payment-modal-content {
+                padding: 2rem; /* 32px */
+                max-width: 500px;
+            }
+            .modal-title {
+                font-size: 1.8rem;
+            }
+            .modal-qr-code img {
+                width: 12rem; /* 192px */
+            }
+            .modal-bank-details {
+                padding: 1.25rem; /* 20px */
+            }
+            .modal-bank-details h4 {
+                font-size: 1.1rem;
+            }
+            .modal-bank-details p {
+                font-size: 0.95rem;
+            }
+            .modal-amount-to-pay {
+                font-size: 1.4rem;
+            }
+            .modal-payment-confirm-button {
+                padding: 0.875rem 1.75rem; /* 14px 28px */
+                font-size: 1.125rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-xl sm:text-2xl font-bold text-indigo-600">
+                YourLogo
+            </a>
+
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none" aria-label="Toggle Mobile Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <ul id="nav-links" class="hidden md:flex space-x-4 lg:space-x-6 items-center text-base lg:text-lg">
+                 <li><a href="index.html#home" class="nav-link hover:text-indigo-600">Home</a></li>
+                <li><a href="index.html#about" class="nav-link hover:text-indigo-600">About Us</a></li>
+                <li><a href="index.html#intervention" class="nav-link hover:text-indigo-600">Our Work</a></li>
+                <li><a href="index.html#impact" class="nav-link hover:text-indigo-600">Our Impact</a></li>
+                <li><a href="index.html#get-involved" class="nav-link hover:text-indigo-600">Get Involved</a></li>
+                 <li><a href="index.html#contact" class="nav-link hover:text-indigo-600">Contact</a></li>
+                <li><a href="#donate-form" class="bg-indigo-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-md hover:bg-indigo-700 transition duration-300 animated-button nav-link-active">Donate</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="index.html#home" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Home</a>
+            <a href="index.html#about" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">About Us</a>
+            <a href="index.html#intervention" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Our Work</a>
+            <a href="index.html#impact" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Our Impact</a>
+            <a href="index.html#get-involved" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Get Involved</a>
+             <a href="index.html#contact" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Contact</a>
+            <a href="#donate-form" class="block px-6 py-3 bg-indigo-600 text-white text-center hover:bg-indigo-700 transition duration-300 animated-button">Donate</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-20 md:py-32 section-gradient text-center">
+            <div class="container mx-auto px-4 sm:px-6" data-aos="fade-up">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Make a Difference Today</h1>
+                <p class="text-base sm:text-lg md:text-xl max-w-3xl mx-auto">Your contribution empowers us to continue our vital work.</p>
+            </div>
+        </section>
+
+        <section id="donation-packages" class="py-16 md:py-24 section-light-yellow">
+            <div class="container mx-auto px-4 sm:px-6">
+                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8 md:mb-12"
+                    data-aos="fade-down">Choose a Donation Package</h2>
+
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                     <div class="package-card" data-amount="18000" data-aos="fade-up" data-aos-delay="100">
+                         <div class="package-amount">+ ₹18000</div>
+                         <div class="package-description">Contribute towards a child's education for</div>
+                         <div class="package-duration">12 MONTHS</div>
+                     </div>
+                      <div class="package-card" data-amount="9000" data-aos="fade-up" data-aos-delay="200">
+                         <div class="package-amount">+ ₹9000</div>
+                         <div class="package-description">Contribute towards a child's education for</div>
+                         <div class="package-duration">6 MONTHS</div>
+                     </div>
+                      <div class="package-card" data-amount="6000" data-aos="fade-up" data-aos-delay="300">
+                         <div class="package-amount">+ ₹6000</div>
+                         <div class="package-description">Contribute towards a child's education for</div>
+                         <div class="package-duration">4 MONTHS</div>
+                     </div>
+                      <div class="package-card" data-amount="4500" data-aos="fade-up" data-aos-delay="400">
+                         <div class="package-amount">+ ₹4500</div>
+                         <div class="package-description">Contribute towards a child's education for</div>
+                         <div class="package-duration">3 MONTHS</div>
+                     </div>
+                      <div class="package-card" data-amount="3000" data-aos="fade-up" data-aos-delay="500">
+                         <div class="package-amount">+ ₹3000</div>
+                         <div class="package-description">Contribute towards a child's education for</div>
+                         <div class="package-duration">2 MONTHS</div>
+                     </div>
+                      <div class="package-card" data-amount="1500" data-aos="fade-up" data-aos-delay="600">
+                         <div class="package-amount">+ ₹1500</div>
+                         <div class="package-description">Contribute towards a child's education for</div>
+                         <div class="package-duration">1 MONTH</div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+
+        <section id="donate-form" class="py-16 md:py-24 section-white"> <div class="container mx-auto px-4 sm:px-6 max-w-2xl">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8 md:mb-12"
+                    data-aos="fade-down">Enter Details</h2>
+
+                <div class="bg-gray-50 p-6 sm:p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200"> <form id="donation-form">
+                        <div class="mb-6 sm:mb-8">
+                             <label class="block text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Or choose a different amount</label>
+                            <div class="flex flex-wrap gap-3 sm:gap-4 justify-center">
+                                <button type="button" class="amount-button" data-amount="500">₹500</button>
+                                <button type="button" class="amount-button" data-amount="1000">₹1000</button>
+                                <button type="button" class="amount-button" data-amount="2000">₹2000</button>
+                                <button type="button" class="amount-button custom-select-button" data-amount="custom">Custom</button> </div>
+                            <div id="custom-amount-input" class="mt-3 sm:mt-4 hidden">
+                                <label for="custom_amount" class="block text-sm font-medium text-gray-700 mb-2">Enter Custom Amount</label>
+                                <input type="number" name="custom_amount" id="custom_amount" class="mt-1 p-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., 7500"> </div>
+                             <input type="hidden" id="selected_amount" name="selected_amount" value=""> </div>
+
+                        <div class="mb-6 sm:mb-8">
+                            <label class="block text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Your Information</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="donor_name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                    <input type="text" name="donor_name" id="donor_name" required class="mt-1 p-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="donor_email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                                    <input type="email" name="donor_email" id="donor_email" required class="mt-1 p-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="donor_phone" class="block text-sm font-medium text-gray-700">Phone Number (Optional)</label>
+                                    <input type="tel" name="donor_phone" id="donor_phone" class="mt-1 p-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., +91 123 456 7890">
+                                </div>
+                                 <div>
+                                    <label for="donor_country" class="block text-sm font-medium text-gray-700">Country</label>
+                                    <input type="text" name="donor_country" id="donor_country" class="mt-1 p-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                                 <div class="md:col-span-2">
+                                    <label for="donor_address" class="block text-sm font-medium text-gray-700">Address (Optional)</label>
+                                    <textarea name="donor_address" id="donor_address" rows="2" class="mt-1 p-2 block w-full shadow-sm text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 font-semibold text-lg animated-button">
+                                Proceed to Pay
+                            </button>
+                        </div>
+
+                         <p class="text-xs text-gray-500 mt-4 text-center">Your information is secure. We do not store full payment details.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 section-light-blue"> <div class="container mx-auto px-4 sm:px-6 text-center">
+                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-700 mb-8 md:mb-12" data-aos="fade-down">How Your Donation Helps</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <div data-aos="fade-up" data-aos-delay="100">
+                         <div class="text-4xl text-orange-600 mb-4"><i class="fas fa-child"></i></div>
+                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Support a Child's Education</h3>
+                         <p class="text-gray-600 text-base">Provide books, uniforms, and tuition fees for a child in need.</p>
+                     </div>
+                      <div data-aos="fade-up" data-aos-delay="300">
+                         <div class="text-4xl text-green-600 mb-4"><i class="fas fa-stethoscope"></i></div>
+                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Fund Healthcare Access</h3>
+                         <p class="text-gray-600 text-base">Help us organize medical camps and provide essential medicines.</p>
+                     </div>
+                      <div data-aos="fade-up" data-aos-delay="500">
+                         <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-tools"></i></div>
+                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Enable Skill Development</h3>
+                         <p class="text-gray-600 text-base">Support vocational training for youth to build sustainable livelihoods.</p>
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+
+        <section class="py-16 md:py-24 section-light-green"> <div class="container mx-auto px-4 sm:px-6 max-w-3xl">
+                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8 md:mb-12" data-aos="fade-down">Frequently Asked Questions</h2>
+                 <div class="space-y-4 sm:space-y-6">
+                     <div class="border border-gray-300 rounded-lg p-4 sm:p-6 bg-white" data-aos="fade-up" data-aos-delay="100"> <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2">Is my donation tax-deductible?</h3>
+                         <p class="text-gray-600 text-base">Yes, your donation is tax-deductible to the extent allowed by law. You will receive a receipt.</p>
+                     </div>
+                      <div class="border border-gray-300 rounded-lg p-4 sm:p-6 bg-white" data-aos="fade-up" data-aos-delay="200"> <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2">How is my donation used?</h3>
+                         <p class="text-gray-600 text-base">Your donation directly supports our programs in education, healthcare, and skill development.</p>
+                     </div>
+                      <div class="border border-gray-300 rounded-lg p-4 sm:p-6 bg-white" data-aos="fade-up" data-aos-delay="300"> <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2">Can I donate monthly?</h3>
+                         <p class="text-gray-600 text-base">Yes, we offer options for recurring monthly donations. Please select the recurring option during checkout.</p>
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-8 sm:py-12">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-6 sm:mb-8">
+                <div>
+                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">YourLogo</h3>
+                    <p class="text-xs sm:text-sm">
+                        [Brief tagline or mission statement here]. Making a difference since [Year].
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Quick Links</h3>
+                    <ul class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
+                        <li><a href="index.html#about" class="hover:text-indigo-400">About Us</a></li>
+                        <li><a href="index.html#intervention" class="hover:text-indigo-400">Our Work</a></li>
+                        <li><a href="index.html#get-involved" class="hover:text-indigo-400">Get Involved</a></li>
+                        <li><a href="#donate-form" class="hover:text-indigo-400">Donate</a></li>
+                        <li><a href="index.html#contact" class="hover:text-indigo-400">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Connect With Us</h3>
+                    <div class="flex space-x-3 sm:space-x-4 mb-3 sm:mb-4 justify-center md:justify-start">
+                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="text-xs sm:text-sm">Email: <a href="mailto:info@yourngo.org" class="hover:text-indigo-400">info@yourngo.org</a></p>
+                    <p class="text-xs sm:text-sm">Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 sm:pt-8 text-center text-xs sm:text-sm">
+                <p>&copy; <span id="currentYear"></span> Your NGO Name. All Rights Reserved.</p>
+                <p>Designed with <i class="fas fa-heart text-red-500"></i> by You</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="paymentModal" class="payment-modal-overlay">
+        <div class="payment-modal-content">
+            <span class="modal-close-button" id="closeModalButton">&times;</span>
+            <div class="modal-title">Complete Your Donation</div>
+
+            <div class="modal-qr-code">
+                 <img src="https://placehold.co/250x250/FF6F00/FFFFFF?text=Scan+to+Pay" alt="Payment QR Code">
+            </div>
+
+            <div class="modal-amount-to-pay">
+                Amount to Pay: <span id="modalAmountDisplay">₹ 0</span>
+            </div>
+
+            <div class="modal-bank-details">
+                <h4>Or Transfer Directly To:</h4>
+                <p><strong>Bank Name:</strong> [Your Bank Name]</p>
+                <p><strong>Account Number:</strong> [Your Account Number]</p>
+                <p><strong>IFSC Code:</strong> [Your IFSC Code]</p>
+                <p><strong>Account Holder Name:</strong> [Your NGO Name]</p>
+            </div>
+
+            <p class="text-sm text-gray-700 mb-4">
+                Please complete the payment using the QR code or bank details above.
+            </p>
+
+            <button id="paymentCompleteButton" class="modal-payment-confirm-button">
+                I have completed the payment
+            </button>
+             <p class="text-xs text-gray-500 mt-4">
+                 After completing the payment, click the button above to get your certificate.
+             </p>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: false,
+            mirror: true,
+            duration: 800,
+            easing: 'ease-out-quad',
+        });
+
+        // JavaScript for Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('#nav-links a, #mobile-menu a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // JavaScript for closing mobile menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // JavaScript for Donation Amount Selection (Packages and Buttons)
+        const packageCards = document.querySelectorAll('.package-card');
+        const amountButtons = document.querySelectorAll('.amount-button');
+        const customAmountInputDiv = document.getElementById('custom-amount-input');
+        const customAmountInput = document.getElementById('custom_amount');
+        const selectedAmountInput = document.getElementById('selected_amount');
+        const customSelectButton = document.querySelector('.custom-select-button');
+
+        // Modal elements
+        const paymentModal = document.getElementById('paymentModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const modalAmountDisplay = document.getElementById('modalAmountDisplay');
+        const paymentCompleteButton = document.getElementById('paymentCompleteButton');
+
+
+        // Function to deselect all amount buttons and package cards
+        const deselectAllAmounts = () => {
+             amountButtons.forEach(btn => btn.classList.remove('selected'));
+             packageCards.forEach(card => card.classList.remove('selected'));
+             customAmountInputDiv.classList.add('hidden');
+             customAmountInput.removeAttribute('required');
+             customAmountInput.value = '';
+             selectedAmountInput.value = '';
+        };
+
+
+        // Add event listeners to package cards
+        packageCards.forEach(card => {
+            card.addEventListener('click', () => {
+                deselectAllAmounts();
+                card.classList.add('selected');
+                const amount = card.getAttribute('data-amount');
+                selectedAmountInput.value = amount;
+            });
+        });
+
+        // Add event listeners to amount buttons
+        amountButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                 deselectAllAmounts();
+                 button.classList.add('selected');
+                 const amountType = button.getAttribute('data-amount');
+
+                 if (amountType === 'custom') {
+                     customAmountInputDiv.classList.remove('hidden');
+                     customAmountInput.setAttribute('required', 'true');
+                 } else {
+                     selectedAmountInput.value = amountType;
+                 }
+            });
+        });
+
+         // Handle Custom Amount Input changes
+        customAmountInput.addEventListener('input', () => {
+             if (!customSelectButton.classList.contains('selected')) {
+                 deselectAllAmounts();
+                 customSelectButton.classList.add('selected');
+                 customAmountInputDiv.classList.remove('hidden');
+                 customAmountInput.setAttribute('required', 'true');
+             }
+             selectedAmountInput.value = customAmountInput.value;
+        });
+
+
+        // Handle form submission (opens modal)
+        const donationForm = document.getElementById('donation-form');
+        if (donationForm) {
+            donationForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                let finalAmount = selectedAmountInput.value;
+                const donorName = document.getElementById('donor_name').value;
+
+                if (!finalAmount || parseFloat(finalAmount) <= 0) {
+                     alert('Please enter or select a valid donation amount.');
+                     return;
+                }
+
+                if (!donorName) {
+                     alert('Please enter your name.');
+                     return;
+                }
+
+
+                // Populate modal with selected amount
+                modalAmountDisplay.textContent = `₹ ${finalAmount}`;
+
+                // Show the modal
+                paymentModal.classList.add('visible');
+
+                // Store donor name and amount temporarily for the next step
+                paymentModal.dataset.donorName = donorName;
+                paymentModal.dataset.donationAmount = finalAmount;
+
+            });
+        }
+
+        // Handle modal close button click
+        closeModalButton.addEventListener('click', () => {
+            paymentModal.classList.remove('visible');
+        });
+
+        // Close modal if clicking outside the content
+        paymentModal.addEventListener('click', (event) => {
+            if (event.target === paymentModal) {
+                paymentModal.classList.remove('visible');
+            }
+        });
+
+
+        // Handle "I have completed the payment" button click (redirects to certificate)
+        paymentCompleteButton.addEventListener('click', () => {
+            const donorName = paymentModal.dataset.donorName;
+            const donationAmount = paymentModal.dataset.donationAmount;
+
+            if (donorName && donationAmount) {
+                 const encodedName = encodeURIComponent(donorName);
+                 const encodedAmount = encodeURIComponent(`₹${donationAmount}`);
+
+                 window.location.href = `certificate.html?donorName=${encodedName}&donationAmount=${encodedAmount}`;
+
+                 donationForm.reset();
+                 deselectAllAmounts();
+                 paymentModal.classList.remove('visible');
+            } else {
+                alert('Donor details or amount not found. Please try again.');
+                paymentModal.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

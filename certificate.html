@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Appreciation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style>
+        /* Base styles for mobile-first approach */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F0F4F8; /* Light, calming background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem; /* Responsive padding */
+            overflow-x: hidden;
+        }
+
+        .certificate-container {
+            background-color: #FDFDFD; /* Off-white paper color */
+            border: 0.9375rem solid #DAA520; /* 15px / 16px = 0.9375rem */
+            padding: 2.5rem; /* 40px / 16px = 2.5rem */
+            max-width: 100%; /* Start with full width */
+            width: 100%;
+            box-shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.25); /* Responsive shadow */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.625rem; /* 10px / 16px = 0.625rem */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JpZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9InBhdHRlcm4tY2lyY2xlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSIgZmlsbD0iI0Y4RjhGOCIvPjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4tY2lyY2xlcykiLz48L3N2Zz4=');
+            background-repeat: repeat;
+            background-size: 1.25rem 1.25rem; /* 20px / 16px = 1.25rem */
+        }
+
+        /* Inner decorative border effect */
+        .certificate-container::before {
+            content: '';
+            position: absolute;
+            top: 0.3125rem; /* 5px */
+            left: 0.3125rem; /* 5px */
+            right: 0.3125rem; /* 5px */
+            bottom: 0.3125rem; /* 5px */
+            border: 0.3125rem solid #B8860B; /* 5px */
+            border-radius: 0.5rem; /* 8px */
+            pointer-events: none; /* Ensure clicks pass through */
+        }
+
+        .certificate-title {
+            font-family: 'Playfair Display', serif; /* Classic serif font */
+            font-size: 2.2rem; /* Adjusted for mobile */
+            font-weight: 700;
+            color: #1A237E; /* Deep Indigo for formality */
+            margin-bottom: 0.625rem; /* 10px */
+            text-transform: uppercase;
+            letter-spacing: 1.5px; /* Adjusted */
+            text-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,0.1); /* Responsive shadow */
+        }
+
+        .certificate-subtitle {
+             font-size: 1.2rem; /* Adjusted for mobile */
+             color: #4A4A4A;
+             margin-bottom: 1.5rem; /* 24px */
+             font-weight: 500;
+             font-style: italic; /* Slightly italic for elegance */
+        }
+
+        .certificate-text {
+            font-size: 1rem; /* Adjusted for mobile */
+            color: #333333; /* Darker text for readability */
+            margin-bottom: 1.25rem; /* 20px */
+            line-height: 1.6; /* Adjusted */
+            max-width: 90%; /* More flexible for mobile */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .donor-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem; /* Adjusted for mobile */
+            font-weight: 400;
+            color: #CD853F; /* Peru - a rich brown/gold */
+            margin-bottom: 1.25rem; /* 20px */
+            display: block;
+            text-shadow: 0.1875rem 0.1875rem 0.375rem rgba(0,0,0,0.15); /* More pronounced shadow */
+        }
+
+         .donation-amount {
+            font-size: 1.6rem; /* Adjusted for mobile */
+            font-weight: 700;
+            color: #228B22; /* ForestGreen - a classic green */
+            margin-bottom: 2rem; /* 32px */
+            display: block;
+            letter-spacing: 1px; /* Adjusted */
+            text-shadow: 0.0625rem 0.0625rem 0.1875rem rgba(0,0,0,0.08);
+         }
+
+        .certificate-footer {
+            font-size: 0.9rem; /* Adjusted for mobile */
+            color: #607D8B;
+            margin-top: 2rem; /* 32px */
+            border-top: 0.125rem dashed #D3D3D3; /* 2px */
+            padding-top: 1rem; /* 16px */
+        }
+
+         .ngo-signature {
+             font-family: 'Great Vibes', cursive;
+             font-size: 2rem; /* Adjusted for mobile */
+             font-weight: 400;
+             color: #1A237E;
+             margin-top: 1.5rem; /* 24px */
+             margin-bottom: 0.3125rem; /* 5px */
+         }
+
+        .ngo-name-footer {
+             font-family: 'Poppins', sans-serif;
+             font-size: 0.9rem; /* Adjusted for mobile */
+             font-weight: 600;
+             color: #4A4A4A;
+        }
+
+        /* Seal/Emblem Placeholder */
+        .certificate-seal {
+            position: absolute;
+            bottom: 1.5rem; /* 24px */
+            left: 1.5rem; /* 24px */
+            width: 5rem; /* 80px */
+            height: 5rem; /* 80px */
+            background: linear-gradient(45deg, #FFD700, #DAA520, #B8860B); /* Richer gold gradient */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem; /* Adjusted for mobile */
+            color: rgba(255, 255, 255, 0.9); /* Whiter icon */
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3); /* Responsive shadow */
+            border: 0.25rem solid rgba(255, 255, 255, 0.6); /* 4px */
+            transform: rotate(-10deg); /* Slightly tilted */
+        }
+         .certificate-seal i {
+             text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0,0,0,0.2); /* Icon shadow */
+         }
+
+         .print-button {
+             margin-top: 1.5rem; /* 24px */
+             padding: 0.75rem 1.25rem; /* 12px 20px */
+             background-color: #1A237E;
+             color: white;
+             border-radius: 0.5rem; /* 8px */
+             cursor: pointer;
+             font-size: 1rem; /* Adjusted */
+             transition: background-color 0.3s ease, transform 0.2s ease;
+             border: none;
+             box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2); /* Responsive shadow */
+         }
+          .print-button:hover {
+              background-color: #283593;
+              transform: translateY(-0.125rem); /* 2px */
+          }
+           .print-button:active {
+              transform: translateY(0);
+              box-shadow: none;
+           }
+
+
+        /* Media Queries for larger screens */
+
+        /* Tablet and larger */
+        @media (min-width: 768px) {
+            .certificate-container {
+                padding: 3.5rem; /* 56px */
+                max-width: 700px;
+            }
+            .certificate-title {
+                font-size: 2.8rem;
+                letter-spacing: 2px;
+            }
+            .certificate-subtitle {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            .certificate-text {
+                font-size: 1.1rem;
+                max-width: 85%;
+            }
+            .donor-name {
+                font-size: 4rem;
+            }
+            .donation-amount {
+                font-size: 2rem;
+            }
+            .certificate-footer {
+                font-size: 1rem;
+                margin-top: 3rem;
+                padding-top: 1.25rem;
+            }
+            .ngo-signature {
+                font-size: 2.5rem;
+                margin-top: 2rem;
+            }
+            .ngo-name-footer {
+                font-size: 1rem;
+            }
+            .certificate-seal {
+                bottom: 2.5rem; /* 40px */
+                left: 2.5rem; /* 40px */
+                width: 6.5rem; /* 104px */
+                height: 6.5rem; /* 104px */
+                font-size: 3.5rem;
+            }
+            .print-button {
+                padding: 0.875rem 1.5rem; /* 14px 24px */
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Desktop and larger */
+        @media (min-width: 1024px) {
+            .certificate-container {
+                padding: 4rem; /* 64px */
+                max-width: 900px;
+            }
+            .certificate-title {
+                font-size: 3.5rem;
+                letter-spacing: 3px;
+            }
+            .certificate-subtitle {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            .certificate-text {
+                font-size: 1.25rem;
+                max-width: 80%;
+            }
+            .donor-name {
+                font-size: 4.5rem;
+            }
+            .donation-amount {
+                font-size: 2.5rem;
+            }
+            .certificate-footer {
+                font-size: 1.125rem;
+                margin-top: 40px;
+                padding-top: 20px;
+            }
+            .ngo-signature {
+                font-size: 3rem;
+                margin-top: 30px;
+            }
+            .ngo-name-footer {
+                font-size: 1.1rem;
+            }
+            .certificate-seal {
+                bottom: 40px;
+                left: 60px;
+                width: 120px;
+                height: 120px;
+                font-size: 4rem;
+            }
+            .print-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
+
+
+         /* Print styles */
+         @media print {
+             body {
+                 background-color: #FFFFFF;
+                 min-height: auto;
+                 padding: 0;
+                 margin: 0;
+                 display: block;
+                 -webkit-print-color-adjust: exact;
+                 print-color-adjust: exact;
+             }
+             .certificate-container {
+                 border: 10px solid #DAA520; /* Keep gold border for print */
+                 box-shadow: none;
+                 padding: 20mm;
+                 margin: 10mm auto;
+                 max-width: 180mm;
+                 background-image: none; /* Hide background pattern for print */
+             }
+             .certificate-container::before {
+                 border: 3px solid #B8860B; /* Adjust inner border for print */
+             }
+             .certificate-seal {
+                 display: none; /* Hide seal for print if it's not a formal part of the print design */
+             }
+             .print-button {
+                 display: none;
+             }
+
+             /* Adjust font sizes for print */
+             .certificate-title { font-size: 2.2rem; letter-spacing: 1px;}
+             .certificate-subtitle { font-size: 1.1rem; }
+             .certificate-text { font-size: 0.9rem; line-height: 1.5; max-width: 100%;}
+             .donor-name { font-size: 3rem; }
+             .donation-amount { font-size: 1.5rem; }
+             .certificate-footer { font-size: 0.85rem; padding-top: 10px;}
+             .ngo-signature { font-size: 2.2rem; margin-top: 20px;}
+             .ngo-name-footer { font-size: 0.8rem; }
+
+         }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="certificate-container">
+        <div class="certificate-title">Certificate of Appreciation</div>
+        <div class="certificate-subtitle">is proudly presented to</div>
+
+        <span id="donorNamePlaceholder" class="donor-name">[Donor Name]</span>
+
+        <div class="certificate-text">For their generous support and contribution of</div>
+
+        <span id="donationAmountPlaceholder" class="donation-amount">[Donation Amount]</span>
+
+        <div class="certificate-text">
+            Your kindness helps us provide essential resources and opportunities to underprivileged children,
+            empowering them to build a brighter future. Thank you for being a beacon of hope.
+        </div>
+
+        <div class="certificate-footer">
+            Issued on: <span id="issueDate"></span>
+        </div>
+
+        <div class="ngo-signature">[Your Signature Image or Text]</div>
+        <div class="ngo-name-footer">Your NGO Name</div>
+
+        <div class="certificate-seal">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+
+
+        <button class="print-button" onclick="handlePrintAndRedirect()">Download / Print Certificate</button>
+    </div>
+
+    <script>
+        // JavaScript to populate the certificate from URL parameters and handle redirect
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const donorName = urlParams.get('donorName') || 'Our Valued Donor'; // Default if name is missing
+            const donationAmount = urlParams.get('donationAmount') || 'a generous amount'; // Default if amount is missing
+
+            // Populate the placeholders
+            document.getElementById('donorNamePlaceholder').textContent = donorName;
+            document.getElementById('donationAmountPlaceholder').textContent = donationAmount;
+
+            // Set the issue date
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('issueDate').textContent = today.toLocaleDateString(undefined, options);
+        });
+
+        // Function to handle print and then redirect
+        function handlePrintAndRedirect() {
+            window.print(); // Trigger the browser's print dialog
+
+            // Use a timeout to wait a moment before redirecting
+            // This gives the browser time to open the print dialog
+            setTimeout(() => {
+                window.location.href = 'index.html'; // Redirect to the homepage
+            }, 300); // 300 milliseconds delay
+        }
+    </script>
+
+</body>
+</html>
