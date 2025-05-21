@@ -223,9 +223,9 @@
 
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-xl sm:text-2xl font-bold text-indigo-600">
-                YourLogo
-            </a>
+         <a href="index.html" class="text-xl sm:text-2xl font-bold text-indigo-600">
+    <img src="images/LOGO.png" alt="Your NGO Name Logo" class="h-12 sm:h-14 md:h-16 w-auto">
+</a>
 
             <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none" aria-label="Toggle Mobile Menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -283,9 +283,40 @@
             <div class="container mx-auto px-4 sm:px-6">
                 <h2 class="section-heading font-bold text-center mb-8 md:mb-12" data-aos="fade-down">About Our Mission</h2>
                 <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
-                    <div class="md:w-1/2" data-aos="fade-right">
-                        <img src="https://via.placeholder.com/600x400/FFB74D/FFFFFF?text=Children+Learning" alt="Children Learning" class="rounded-lg shadow-lg w-full">
-                    </div>
+                   <div class="md:w-1/2 relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-right">
+    <div id="slideshow-container" class="flex transition-transform duration-700 ease-in-out" style="width: 100%;">
+        <div class="w-full flex-shrink-0">
+            <img src="images/children_slide1.jpg" alt="Children learning together" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full flex-shrink-0">
+            <img src="images/children_slide2.jpg" alt="Children receiving healthcare" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full flex-shrink-0">
+            <img src="images/children_slide3.jpg" alt="Community members working together" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full flex-shrink-0">
+            <img src="images/children_slide4.jpg" alt="Children smiling and playing" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full flex-shrink-0">
+            <img src="images/children_slide5.jpg" alt="Children getting nutritious food" class="w-full h-full object-cover">
+        </div>
+    </div>
+
+    <div id="slideshow-dots" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <span class="dot bg-white h-2 w-2 rounded-full cursor-pointer opacity-75"></span>
+        <span class="dot bg-white h-2 w-2 rounded-full cursor-pointer opacity-50"></span>
+        <span class="dot bg-white h-2 w-2 rounded-full cursor-pointer opacity-50"></span>
+        <span class="dot bg-white h-2 w-2 rounded-full cursor-pointer opacity-50"></span>
+        <span class="dot bg-white h-2 w-2 rounded-full cursor-pointer opacity-50"></span>
+    </div>
+
+    <button id="prev-slide" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-gray-800 hover:bg-gray-200 focus:outline-none">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button id="next-slide" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-gray-800 hover:bg-gray-200 focus:outline-none">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+</div>
                     <div class="md:w-1/2 text-base sm:text-lg" data-aos="fade-left" data-aos-delay="200">
                         <p class="mb-4">
                             At Your NGO Name, we believe every child deserves a chance to thrive. We are a non-profit organization dedicated to empowering underprivileged children and communities through holistic interventions.
@@ -411,15 +442,24 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                     <div class="info-card p-6" data-aos="fade-right">
                         <h3 class="text-xl sm:text-2xl font-semibold mb-4">Contact Information</h3>
-                        <p class="mb-3 text-base"><i class="fas fa-map-marker-alt text-indigo-600 mr-3"></i> [Your NGO Address Here], City, State, ZIP</p>
-                        <p class="mb-3 text-base"><i class="fas fa-phone-alt text-indigo-600 mr-3"></i> +1 (123) 456-7890</p>
-                        <p class="mb-3 text-base"><i class="fas fa-envelope text-indigo-600 mr-3"></i> <a href="mailto:info@yourngo.org" class="text-indigo-600 hover:underline">info@yourngo.org</a></p>
-                        <div class="flex space-x-4 mt-6 justify-center md:justify-start">
-                            <a href="#" aria-label="Facebook" class="text-gray-600 hover:text-indigo-600 text-2xl"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Twitter" class="text-gray-600 hover:text-indigo-600 text-2xl"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="Instagram" class="text-gray-600 hover:text-indigo-600 text-2xl"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="LinkedIn" class="text-gray-600 hover:text-indigo-600 text-2xl"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                        <p class="mb-3 text-base"><i class="fas fa-map-marker-alt text-indigo-600 mr-3"></i>  Singh Bhawan, Vidyapati Marg, Patna-800001</p>
+                        <p class="mb-3 text-base"><i class="fas fa-phone-alt text-indigo-600 mr-3"></i> +91 9876543210</p>
+                        <p class="mb-3 text-base"><i class="fas fa-envelope text-indigo-600 mr-3"></i> <a href="mailto:Sahajshakti7@gmail.com" class="text-indigo-600 hover:underline">Sahajshakti7@gmail.com</a></p>
+                       <div class="flex space-x-4 mt-6 justify-center md:justify-start">
+    <a href="https://www.facebook.com/people/Sahajshakti-Sarvakalyaan/61559191388218/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-600 hover:text-indigo-600 text-2xl">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="text-gray-600 hover:text-indigo-600 text-2xl">
+        <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://www.instagram.com/sahajshaktisarvakalyaantrust/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-600 hover:text-indigo-600 text-2xl">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-gray-600 hover:text-indigo-600 text-2xl">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+</div>
+
                     </div>
                     <div class="info-card p-6" data-aos="fade-left" data-aos-delay="200">
                         <h3 class="text-xl sm:text-2xl font-semibold mb-4">Send Us a Message</h3>
@@ -467,17 +507,26 @@
                 <div>
                     <h3 class="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Connect With Us</h3>
                     <div class="flex space-x-3 sm:space-x-4 mb-3 sm:mb-4 justify-center md:justify-start">
-                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <p class="text-xs sm:text-sm">Email: <a href="mailto:info@yourngo.org" class="hover:text-indigo-400">info@yourngo.org</a></p>
-                    <p class="text-xs sm:text-sm">Phone: +1 (123) 456-7890</p>
+    <a href="https://www.facebook.com/people/Sahajshakti-Sarvakalyaan/61559191388218/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl">
+        <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://www.instagram.com/sahajshaktisarvakalyaantrust/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-gray-400 hover:text-indigo-400 text-lg sm:text-xl">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+</div>
+
+                    <p class="text-xs sm:text-sm">Email: <a href="Sahajshakti7@gmail.com" class="hover:text-indigo-400">Sahajshakti7@gmail.com</a></p>
+                    <p class="text-xs sm:text-sm">Phone: +91 9876543210</p>
                 </div>
             </div>
             <div class="border-t border-gray-700 pt-6 sm:pt-8 text-center text-xs sm:text-sm">
-                <p>&copy; <span id="currentYear"></span> Your NGO Name. All Rights Reserved.</p>
+                <p>&copy; <span id="currentYear"></span> Sahajshakti Sarvakalyaan Trust. All Rights Reserved.</p>
                 <p>Designed with <i class="fas fa-heart text-red-500"></i> by You</p>
             </div>
         </div>
@@ -589,6 +638,98 @@
 
                 this.reset();
             });
+            // Slideshow Logic
+const slideshowContainer = document.getElementById('slideshow-container');
+const dotsContainer = document.getElementById('slideshow-dots');
+const prevButton = document.getElementById('prev-slide');
+const nextButton = document.getElementById('next-slide');
+
+if (slideshowContainer && dotsContainer) { // Check if elements exist before proceeding
+    const slides = slideshowContainer.children;
+    let currentSlideIndex = 0;
+    const totalSlides = slides.length;
+    let slideshowInterval; // Variable to hold the interval ID
+
+    // Create dots dynamically (or keep your static ones and just update classes)
+    // If you used static dots like in the HTML above, you can skip this dynamic creation and just get the dot elements.
+    // Here, we'll assume you might want dynamic creation for scalability.
+    dotsContainer.innerHTML = ''; // Clear existing static dots if dynamic creation is preferred
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot', 'bg-white', 'h-2', 'w-2', 'rounded-full', 'cursor-pointer');
+        if (i === 0) {
+            dot.classList.add('opacity-75'); // Active state
+        } else {
+            dot.classList.add('opacity-50');
+        }
+        dot.dataset.index = i; // Store index for navigation
+        dot.addEventListener('click', () => showSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+    const dots = dotsContainer.querySelectorAll('.dot'); // Get all dots after creation
+
+    function showSlide(index) {
+        if (index >= totalSlides) {
+            index = 0;
+        } else if (index < 0) {
+            index = totalSlides - 1;
+        }
+        currentSlideIndex = index;
+        const offset = -currentSlideIndex * 100;
+        slideshowContainer.style.transform = `translateX(${offset}%)`;
+
+        // Update active dot
+        dots.forEach((dot, idx) => {
+            if (idx === currentSlideIndex) {
+                dot.classList.add('opacity-75');
+                dot.classList.remove('opacity-50');
+            } else {
+                dot.classList.remove('opacity-75');
+                dot.classList.add('opacity-50');
+            }
+        });
+    }
+
+    function nextSlide() {
+        showSlide(currentSlideIndex + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlideIndex - 1);
+    }
+
+    // Auto-advance slides
+    function startSlideshow() {
+        slideshowInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds (5000ms)
+    }
+
+    function stopSlideshow() {
+        clearInterval(slideshowInterval);
+    }
+
+    // Add event listeners for navigation buttons
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            stopSlideshow(); // Stop auto-advance on manual interaction
+            prevSlide();
+            startSlideshow(); // Restart auto-advance after a brief pause or immediately
+        });
+    }
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            stopSlideshow(); // Stop auto-advance on manual interaction
+            nextSlide();
+            startSlideshow(); // Restart auto-advance
+        });
+    }
+
+    // Start the slideshow when the page loads
+    startSlideshow();
+
+    // Optional: Pause slideshow on hover
+    slideshowContainer.parentElement.addEventListener('mouseenter', stopSlideshow);
+    slideshowContainer.parentElement.addEventListener('mouseleave', startSlideshow);
+}
         }
     </script>
 
