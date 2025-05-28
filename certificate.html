@@ -3,190 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate of Appreciation</title>
+    <meta name="description" content="Certificate of Appreciation from Your NGO for your generous donation supporting education, healthcare, and skill development.">
+    <meta name="keywords" content="certificate, donation, Your NGO, appreciation, charity, education, healthcare">
+    <title>Certificate of Appreciation - Your NGO</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;500;700&family=Cinzel:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
     <style>
-        /* Base styles for mobile-first approach */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #F0F4F8; /* Light, calming background */
+            background: linear-gradient(to bottom, #DBEAFE, #FFF8E1);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 1rem; /* Responsive padding */
+            padding: 1rem;
             overflow-x: hidden;
         }
 
         .certificate-container {
-            background-color: #FDFDFD; /* Off-white paper color */
-            border: 0.9375rem solid #DAA520; /* 15px / 16px = 0.9375rem */
-            padding: 2.5rem; /* 40px / 16px = 2.5rem */
-            max-width: 100%; /* Start with full width */
+            background: linear-gradient(to right, #F8FAF6, #FFF8E1);
+            border: 1rem solid;
+            border-image: linear-gradient(to right, #FFD700, #DAA520, #FFEC8B, #DAA520) 1;
+            border-radius: 0.75rem;
+            padding: 1rem 2.5rem 2.5rem;
+            max-width: 100%;
             width: 100%;
-            box-shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.25); /* Responsive shadow */
+            box-shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.25), inset 0 0 0.75rem rgba(218, 165, 32, 0.3);
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 0.625rem; /* 10px / 16px = 0.625rem */
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JpZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9InBhdHRlcm4tY2lyY2xlcyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSIgZmlsbD0iI0Y4RjhGOCIvPjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4tY2lyY2xlcykiLz48L3N2Zz4=');
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZD0iTTUwIDUwQzY1IDE1IDg1IDM1IDg1IDUwQz85IDY1IDY1IDg1IDUwIDg1QzM1IDg1IDE1IDY1IDM1IDUwQzM1IDM1IDY1IDE1IDUwIDUwWiIgZmlsbD0iI0ZGRjhGOCIgZmlsbC1vcGFjaXR5PSIwLjEiLz48L3N2Zz4=');
             background-repeat: repeat;
-            background-size: 1.25rem 1.25rem; /* 20px / 16px = 1.25rem */
+            background-size: 3rem 3rem;
         }
 
-        /* Inner decorative border effect */
         .certificate-container::before {
             content: '';
             position: absolute;
-            top: 0.3125rem; /* 5px */
-            left: 0.3125rem; /* 5px */
-            right: 0.3125rem; /* 5px */
-            bottom: 0.3125rem; /* 5px */
-            border: 0.3125rem solid #B8860B; /* 5px */
-            border-radius: 0.5rem; /* 8px */
-            pointer-events: none; /* Ensure clicks pass through */
+            top: 0.25rem;
+            left: 0.25rem;
+            right: 0.25rem;
+            bottom: 0.25rem;
+            border: 0.125rem solid;
+            border-image: linear-gradient(to right, #FF6F00, #14B8A6, #8B5CF6, #EC4899) 1;
+            border-radius: 0.5rem;
+            pointer-events: none;
+        }
+
+        .logo-placeholder {
+            width: 100px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            object-fit: contain;
+            border-radius: 0.25rem;
         }
 
         .certificate-title {
-            font-family: 'Playfair Display', serif; /* Classic serif font */
-            font-size: 2.2rem; /* Adjusted for mobile */
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: #1A237E; /* Deep Indigo for formality */
-            margin-bottom: 0.625rem; /* 10px */
+            color: #1E3A8A;
+            margin-bottom: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px; /* Adjusted */
-            text-shadow: 0.125rem 0.125rem 0.3125rem rgba(0,0,0,0.1); /* Responsive shadow */
+            letter-spacing: 1.5px;
+            text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(218, 165, 32, 0.5);
         }
 
         .certificate-subtitle {
-             font-size: 1.2rem; /* Adjusted for mobile */
-             color: #4A4A4A;
-             margin-bottom: 1.5rem; /* 24px */
-             font-weight: 500;
-             font-style: italic; /* Slightly italic for elegance */
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.125rem;
+            color: #4B5563;
+            margin-bottom: 1.25rem;
+            font-weight: 500;
+            font-style: italic;
         }
 
         .certificate-text {
-            font-size: 1rem; /* Adjusted for mobile */
-            color: #333333; /* Darker text for readability */
-            margin-bottom: 1.25rem; /* 20px */
-            line-height: 1.6; /* Adjusted */
-            max-width: 90%; /* More flexible for mobile */
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.875rem;
+            color: #374151;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+            max-width: 90%;
             margin-left: auto;
             margin-right: auto;
         }
 
         .donor-name {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem; /* Adjusted for mobile */
-            font-weight: 400;
-            color: #CD853F; /* Peru - a rich brown/gold */
-            margin-bottom: 1.25rem; /* 20px */
+            font-size: 2.5rem;
+            margin: 1.25rem 0;
             display: block;
-            text-shadow: 0.1875rem 0.1875rem 0.375rem rgba(0,0,0,0.15); /* More pronounced shadow */
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0,0,0,0.2);
+            background: linear-gradient(to right, #FFD700, #F4C430);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-         .donation-amount {
-            font-size: 1.6rem; /* Adjusted for mobile */
+        .donation-amount {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #228B22; /* ForestGreen - a classic green */
-            margin-bottom: 2rem; /* 32px */
+            margin: 1.25rem 0;
             display: block;
-            letter-spacing: 1px; /* Adjusted */
-            text-shadow: 0.0625rem 0.0625rem 0.1875rem rgba(0,0,0,0.08);
-         }
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #14B8A6, #059669);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0,0,0,0.1);
+        }
 
         .certificate-footer {
-            font-size: 0.9rem; /* Adjusted for mobile */
-            color: #607D8B;
-            margin-top: 2rem; /* 32px */
-            border-top: 0.125rem dashed #D3D3D3; /* 2px */
-            padding-top: 1rem; /* 16px */
+            font-size: 0.75rem;
+            color: #6B7280;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: linear-gradient(to right, #FFF8E0, #FFD700);
+            border-radius: 0.5rem;
+            box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-         .ngo-signature {
-             font-family: 'Great Vibes', cursive;
-             font-size: 2rem; /* Adjusted for mobile */
-             font-weight: 400;
-             color: #1A237E;
-             margin-top: 1.5rem; /* 24px */
-             margin-bottom: 0.3125rem; /* 5px */
-         }
-
-        .ngo-name-footer {
-             font-family: 'Poppins', sans-serif;
-             font-size: 0.9rem; /* Adjusted for mobile */
-             font-weight: 600;
-             color: #4A4A4A;
-        }
-
-        /* Seal/Emblem Placeholder */
-        .certificate-seal {
+        .certificate-footer::before {
+            content: '';
             position: absolute;
-            bottom: 1.5rem; /* 24px */
-            left: 1.5rem; /* 24px */
-            width: 5rem; /* 80px */
-            height: 5rem; /* 80px */
-            background: linear-gradient(45deg, #FFD700, #DAA520, #B8860B); /* Richer gold gradient */
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at bottom, #FFF8E7, transparent 70%);
+            opacity: 0.2;
+        }
+
+        .certificate-footer-content {
+            position: relative;
+            z-index: 1;
+            border: 1px solid #DAA520;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            background: #FFF8E7;
+        }
+
+        .signature-block {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.5rem; /* Adjusted for mobile */
-            color: rgba(255, 255, 255, 0.9); /* Whiter icon */
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3); /* Responsive shadow */
-            border: 0.25rem solid rgba(255, 255, 255, 0.6); /* 4px */
-            transform: rotate(-10deg); /* Slightly tilted */
+            max-width: 80%;
+            margin: 1.5rem auto;
         }
-         .certificate-seal i {
-             text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0,0,0,0.2); /* Icon shadow */
-         }
 
-         .print-button {
-             margin-top: 1.5rem; /* 24px */
-             padding: 0.75rem 1.25rem; /* 12px 20px */
-             background-color: #1A237E;
-             color: white;
-             border-radius: 0.5rem; /* 8px */
-             cursor: pointer;
-             font-size: 1rem; /* Adjusted */
-             transition: background-color 0.3s ease, transform 0.2s ease;
-             border: none;
-             box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2); /* Responsive shadow */
-         }
-          .print-button:hover {
-              background-color: #283593;
-              transform: translateY(-0.125rem); /* 2px */
-          }
-           .print-button:active {
-              transform: translateY(0);
-              box-shadow: none;
-           }
+        .signature-item {
+            text-align: center;
+        }
 
+        .signature-placeholder {
+            width: 120px;
+            height: 40px;
+            margin: 0 auto;
+            background-image: url('/images/signature-placeholder.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 1px dashed #DAA520;
+            border-radius: 0.25rem;
+            transition: border-color 0.3s ease;
+        }
 
-        /* Media Queries for larger screens */
+        .signature-placeholder:hover {
+            border-color: #FFD700;
+        }
 
-        /* Tablet and larger */
+        .ngo-name {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            background: linear-gradient(to right, #FFD700, #DAA520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .action-button {
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(to right, #FF6F00, #14B8A6, #8B5CF6, #EC4899);
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2);
+        }
+
+        .action-button:hover {
+            background: linear-gradient(to right, #EC4899, #8B5CF6, #14B8A6, #FF6F00);
+            transform: translateY(-0.125rem);
+            box-shadow: 0 0.375rem 0.75rem rgba(0,0,0,0.3);
+        }
+
+        .action-button:focus {
+            outline: 2px solid #1E3A8A;
+            outline-offset: 2px;
+        }
+
+        .action-button:active {
+            transform: translateY(0);
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.2);
+        }
+
+        .header-link {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.75rem;
+            color: #1E3A8A;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .header-link:hover {
+            color: #FF6F00;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1E3A8A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .certificate-container, .action-button, .signature-placeholder {
+                transition: none;
+            }
+            .loading-spinner {
+                animation: none;
+            }
+        }
+
         @media (min-width: 768px) {
             .certificate-container {
-                padding: 3.5rem; /* 56px */
-                max-width: 700px;
+                padding: 1.5rem 3rem 3rem;
+                max-width: 750px;
+            }
+            .logo-placeholder {
+                width: 120px;
+                height: 80px;
             }
             .certificate-title {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
                 letter-spacing: 2px;
+            }
+            .certificate-subtitle {
+                font-size: 1.25rem;
+                margin-bottom: 1.5rem;
+            }
+            .certificate-text {
+                font-size: 1rem;
+                max-width: 85%;
+            }
+            .donor-name {
+                font-size: 3.5rem;
+                line-height: 1.3;
+            }
+            .donation-amount {
+                font-size: 1.75rem;
+            }
+            .certificate-footer {
+                font-size: 0.875rem;
+                margin-top: 2.5rem;
+                padding: 1.25rem;
+            }
+            .ngo-name {
+                font-size: 0.875rem;
+            }
+            .action-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+            .signature-placeholder {
+                width: 150px;
+                height: 50px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .certificate-container {
+                padding: 2rem 3.5rem 3.5rem;
+                max-width: 900px;
+            }
+            .logo-placeholder {
+                width: 150px;
+                height: 100px;
+            }
+            .certificate-title {
+                font-size: 3rem;
+                letter-spacing: 2.5px;
             }
             .certificate-subtitle {
                 font-size: 1.5rem;
                 margin-bottom: 2rem;
             }
             .certificate-text {
-                font-size: 1.1rem;
-                max-width: 85%;
+                font-size: 1.125rem;
+                max-width: 80%;
             }
             .donor-name {
                 font-size: 4rem;
@@ -197,182 +351,231 @@
             .certificate-footer {
                 font-size: 1rem;
                 margin-top: 3rem;
-                padding-top: 1.25rem;
+                padding: 1.5rem;
             }
-            .ngo-signature {
-                font-size: 2.5rem;
-                margin-top: 2rem;
-            }
-            .ngo-name-footer {
+            .ngo-name {
                 font-size: 1rem;
             }
-            .certificate-seal {
-                bottom: 2.5rem; /* 40px */
-                left: 2.5rem; /* 40px */
-                width: 6.5rem; /* 104px */
-                height: 6.5rem; /* 104px */
-                font-size: 3.5rem;
-            }
-            .print-button {
-                padding: 0.875rem 1.5rem; /* 14px 24px */
-                font-size: 1.1rem;
+            .signature-placeholder {
+                width: 180px;
+                height: 60px;
             }
         }
 
-        /* Desktop and larger */
-        @media (min-width: 1024px) {
+        @media print {
+            body {
+                background: #FFFFFF;
+                min-height: auto;
+                padding: 0;
+                margin: 0;
+                display: block;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
             .certificate-container {
-                padding: 4rem; /* 64px */
-                max-width: 900px;
+                border: 10px double #DAA520;
+                box-shadow: none;
+                padding: 10mm 15mm 15mm;
+                margin: 10mm auto;
+                max-width: 180mm;
+                background-image: none;
+                background: #F8FAF6;
             }
-            .certificate-title {
-                font-size: 3.5rem;
-                letter-spacing: 3px;
+            .certificate-container::before {
+                border: none;
             }
-            .certificate-subtitle {
-                font-size: 1.8rem;
-                margin-bottom: 30px;
+            .action-buttons, .header-link, .loading-overlay {
+                display: none;
             }
-            .certificate-text {
-                font-size: 1.25rem;
-                max-width: 80%;
-            }
-            .donor-name {
-                font-size: 4.5rem;
-            }
-            .donation-amount {
-                font-size: 2.5rem;
-            }
-            .certificate-footer {
-                font-size: 1.125rem;
-                margin-top: 40px;
-                padding-top: 20px;
-            }
-            .ngo-signature {
-                font-size: 3rem;
-                margin-top: 30px;
-            }
-            .ngo-name-footer {
-                font-size: 1.1rem;
-            }
-            .certificate-seal {
-                bottom: 40px;
-                left: 60px;
-                width: 120px;
-                height: 120px;
-                font-size: 4rem;
-            }
-            .print-button {
-                padding: 12px 25px;
-                font-size: 1.1rem;
-            }
+            .certificate-title { font-size: 2.25rem; letter-spacing: 1.5px; }
+            .certificate-subtitle { font-size: 1.125rem; }
+            .certificate-text { font-size: 0.875rem; line-height: 1.5; max-width: 100%; }
+            .donor-name { font-size: 3rem; }
+            .donation-amount { font-size: 1.5rem; }
+            .certificate-footer { font-size: 0.75rem; padding: 0.75rem; }
+            .certificate-footer::before { display: none; }
+            .certificate-footer-content { border: none; background: none; padding: 0; }
+            .signature-placeholder { border: none; }
+            .ngo-name { font-size: 0.75rem; }
         }
-
-
-         /* Print styles */
-         @media print {
-             body {
-                 background-color: #FFFFFF;
-                 min-height: auto;
-                 padding: 0;
-                 margin: 0;
-                 display: block;
-                 -webkit-print-color-adjust: exact;
-                 print-color-adjust: exact;
-             }
-             .certificate-container {
-                 border: 10px solid #DAA520; /* Keep gold border for print */
-                 box-shadow: none;
-                 padding: 20mm;
-                 margin: 10mm auto;
-                 max-width: 180mm;
-                 background-image: none; /* Hide background pattern for print */
-             }
-             .certificate-container::before {
-                 border: 3px solid #B8860B; /* Adjust inner border for print */
-             }
-             .certificate-seal {
-                 display: none; /* Hide seal for print if it's not a formal part of the print design */
-             }
-             .print-button {
-                 display: none;
-             }
-
-             /* Adjust font sizes for print */
-             .certificate-title { font-size: 2.2rem; letter-spacing: 1px;}
-             .certificate-subtitle { font-size: 1.1rem; }
-             .certificate-text { font-size: 0.9rem; line-height: 1.5; max-width: 100%;}
-             .donor-name { font-size: 3rem; }
-             .donation-amount { font-size: 1.5rem; }
-             .certificate-footer { font-size: 0.85rem; padding-top: 10px;}
-             .ngo-signature { font-size: 2.2rem; margin-top: 20px;}
-             .ngo-name-footer { font-size: 0.8rem; }
-
-         }
-
-
     </style>
 </head>
 <body>
-
-    <div class="certificate-container">
-        <div class="certificate-title">Certificate of Appreciation</div>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="certificate-container" role="document" aria-labelledby="certificate-title">
+        <a href="index.html" class="header-link" aria-label="Return to Your NGO homepage">Back to Home</a>
+        <img src="images\LOGO.png" alt="Your NGO Logo" class="logo-placeholder">
+        <h1 id="certificate-title" class="certificate-title">Certificate of Appreciation</h1>
         <div class="certificate-subtitle">is proudly presented to</div>
-
-        <span id="donorNamePlaceholder" class="donor-name">[Donor Name]</span>
-
-        <div class="certificate-text">For their generous support and contribution of</div>
-
-        <span id="donationAmountPlaceholder" class="donation-amount">[Donation Amount]</span>
-
+        <span id="donorNamePlaceholder" class="donor-name" aria-label="Donor Name">Our Valued Donor</span>
         <div class="certificate-text">
-            Your kindness helps us provide essential resources and opportunities to underprivileged children,
-            empowering them to build a brighter future. Thank you for being a beacon of hope.
+            In recognition of their exemplary generosity, we honor <strong id="donorNameInline" aria-hidden="true"></strong> for their 
+            contribution of <strong id="donationAmountInline" aria-hidden="true"></strong>. This donation empowers Your NGO to provide 
+            education, healthcare, and vocational training to underprivileged communities, fostering sustainable change and hope.
         </div>
-
+        <div class="donation-amount" id="donationAmountPlaceholder" aria-label="Donation Amount">a generous amount</div>
+        <div class="certificate-text">
+            Your support transforms lives, enabling children to access quality education, families to receive essential medical care, 
+            and individuals to gain skills for self-reliance. Your NGO is deeply grateful for your commitment to our mission of 
+            empowering communities since 1995.
+        </div>
+        <div class="signature-block">
+            <div class="signature-item">
+                <div class="signature-placeholder" aria-label="Signature Placeholder"></div>
+                <div class="ngo-name">Your NGO</div>
+            </div>
+        </div>
         <div class="certificate-footer">
-            Issued on: <span id="issueDate"></span>
+            <div class="certificate-footer-content">
+                Certificate No: <span id="certificateNumber"></span><br>
+                Issued on: <span id="issueDate" aria-label="Issue Date"></span><br>
+                Awarded to <span id="donorNameFooter"></span> for their generous donation of <span id="donationAmountFooter"></span>.
+            </div>
         </div>
-
-        <div class="ngo-signature">[Your Signature Image or Text]</div>
-        <div class="ngo-name-footer">Your NGO Name</div>
-
-        <div class="certificate-seal">
-            <i class="fas fa-hand-holding-heart"></i>
+        <div class="action-buttons">
+            <button class="action-button" onclick="downloadPDF()">Download as PDF</button>
+            <button class="action-button" onclick="sharePDF()">Share PDF</button>
+            <button class="action-button" onclick="window.location.href='index.html'" aria-label="Back to Homepage">Back to Homepage</button>
         </div>
-
-
-        <button class="print-button" onclick="handlePrintAndRedirect()">Download / Print Certificate</button>
     </div>
 
     <script>
-        // JavaScript to populate the certificate from URL parameters and handle redirect
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const donorName = urlParams.get('donorName') || 'Our Valued Donor'; // Default if name is missing
-            const donationAmount = urlParams.get('donationAmount') || 'a generous amount'; // Default if amount is missing
+            const donorName = decodeURIComponent(urlParams.get('donorName') || 'Our Valued Donor');
+            const donationAmount = decodeURIComponent(urlParams.get('donationAmount') || 'a generous amount');
 
-            // Populate the placeholders
-            document.getElementById('donorNamePlaceholder').textContent = donorName;
-            document.getElementById('donationAmountPlaceholder').textContent = donationAmount;
+            if (!donorName || donorName === 'null') {
+                console.warn('Donor name missing in URL parameters');
+            }
+            if (!donationAmount || donationAmount === 'null') {
+                console.warn('Donation amount missing in URL parameters');
+            }
 
-            // Set the issue date
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('issueDate').textContent = today.toLocaleDateString(undefined, options);
+            const donorNameElements = [
+                document.getElementById('donorNamePlaceholder'),
+                document.getElementById('donorNameInline'),
+                document.getElementById('donorNameFooter')
+            ];
+            const donationAmountElements = [
+                document.getElementById('donationAmountPlaceholder'),
+                document.getElementById('donationAmountInline'),
+                document.getElementById('donationAmountFooter')
+            ];
+
+            donorNameElements.forEach(el => {
+                if (el) el.textContent = donorName;
+            });
+            donationAmountElements.forEach(el => {
+                if (el) el.textContent = donationAmount;
+            });
+
+            const issueDateElement = document.getElementById('issueDate');
+            if (issueDateElement) {
+                const today = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                issueDateElement.textContent = today.toLocaleDateString('en-US', options);
+            }
+
+            const certificateNumberElement = document.getElementById('certificateNumber');
+            if (certificateNumberElement) {
+                const randomNum = Math.floor(1000 + Math.random() * 9000);
+                certificateNumberElement.textContent = `YNGO-2025-${randomNum}`;
+            }
+
+            // Add fallback for logo if it fails to load
+            document.querySelector('.logo-placeholder').onerror = function() {
+                console.warn('Logo failed to load, using fallback');
+                this.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAEBgJq8fQ4bQAAAABJRU5ErkJggg==';
+                this.alt = 'Logo Unavailable';
+            };
         });
 
-        // Function to handle print and then redirect
-        function handlePrintAndRedirect() {
-            window.print(); // Trigger the browser's print dialog
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
 
-            // Use a timeout to wait a moment before redirecting
-            // This gives the browser time to open the print dialog
-            setTimeout(() => {
-                window.location.href = 'index.html'; // Redirect to the homepage
-            }, 300); // 300 milliseconds delay
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        function generatePDFBlob() {
+            return new Promise((resolve, reject) => {
+                if (!window.html2pdf) {
+                    reject(new Error('html2pdf.js library failed to load. Please check your internet connection or try another browser.'));
+                    return;
+                }
+                const element = document.querySelector('.certificate-container');
+                const opt = {
+                    margin: 0.5,
+                    filename: 'YourNGO_Certificate.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 1, useCORS: true },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).output('blob').then(blob => {
+                    resolve(blob);
+                }).catch(err => {
+                    reject(err);
+                });
+            });
+        }
+
+        function downloadPDF() {
+            if (!window.html2pdf) {
+                alert('PDF generation is not supported. Please try Chrome or Edge.');
+                return;
+            }
+            showLoading();
+            generatePDFBlob().then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'YourNGO_Certificate.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                hideLoading();
+            }).catch(err => {
+                hideLoading();
+                console.error('PDF generation failed:', err);
+                alert(`Failed to generate PDF: ${err.message || 'Unknown error'}. Please ensure all images are accessible and try again in Chrome or Edge.`);
+            });
+        }
+
+        function sharePDF() {
+            if (!window.html2pdf) {
+                alert('PDF generation is not supported. Please try Chrome or Edge.');
+                return;
+            }
+            if (navigator.share && navigator.canShare) {
+                showLoading();
+                generatePDFBlob().then(blob => {
+                    const file = new File([blob], 'YourNGO_Certificate.pdf', { type: 'application/pdf' });
+                    const shareData = {
+                        files: [file],
+                        title: 'Your NGO Certificate of Appreciation',
+                        text: 'I received this Certificate of Appreciation from Your NGO for my donation!'
+                    };
+                    navigator.share(shareData).then(() => {
+                        hideLoading();
+                    }).catch(err => {
+                        hideLoading();
+                        console.error('Sharing failed:', err);
+                        alert('Sharing failed. Please download the PDF and share manually.');
+                    });
+                }).catch(err => {
+                    hideLoading();
+                    console.error('PDF generation failed:', err);
+                    alert(`Failed to generate PDF: ${err.message || 'Unknown error'}. Please ensure all images are accessible and try downloading instead.`);
+                });
+            } else {
+                alert('Sharing is not supported on this device. Please download and share manually.');
+            }
         }
     </script>
-
 </body>
 </html>
