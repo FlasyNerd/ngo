@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function scrollToDonateForm() {
-        const donateFormElement = document.getElementById('donate-form'); // Changed variable name to avoid conflict
+        const donateFormElement = document.getElementById('selected-amount-box'); // Changed variable name to avoid conflict
         if (donateFormElement) {
             const headerOffset = header ? header.offsetHeight : 0;
             const elementPosition = donateFormElement.getBoundingClientRect().top + window.pageYOffset;
