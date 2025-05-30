@@ -46,7 +46,7 @@
             <a href="index.html#impact" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600">Our Impact</a>
             <a href="index.html#get-involved" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600">Get Involved</a>
             <a href="index.html#contact" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600">Contact</a>
-            <a href="donation.html" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 font-semibold bg-orange-50">Donate</a>
+            <a href="donate.html" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 font-semibold bg-orange-50">Donate</a>
         </div>
     </header>
 
@@ -137,8 +137,7 @@
                                 </div>
                                 <div>
                                     <label for="donor_phone">Phone Number (Optional)</label>
-                                    <input type="tel" name="donor_phone" id="donor_phone" data-field="donor_phone" placeholder="e.g., +91 9876543210
-">
+                                    <input type="tel" name="donor_phone" id="donor_phone" data-field="donor_phone" placeholder="e.g., +91 9876543210">
                                 </div>
                                 <div>
                                     <label for="donor_country">Country</label>
@@ -220,7 +219,7 @@
                         <li><a href="index.html#intervention" class="hover:text-orange-400">Our Work</a></li>
                         <li><a href="index.html#impact" class="hover:text-orange-400">Impact</a></li>
                         <li><a href="index.html#get-involved" class="hover:text-orange-400">Get Involved</a></li>
-                        <li><a href="donation.html" class="hover:text-orange-400 font-semibold">Donate</a></li>
+                        <li><a href="donate.html" class="hover:text-orange-400 font-semibold">Donate</a></li>
                         <li><a href="index.html#contact" class="hover:text-orange-400">Contact</a></li>
                     </ul>
                 </div>
@@ -251,27 +250,17 @@
     <div id="paymentModal" class="payment-modal-overlay">
         <div class="payment-modal-content">
             <span class="modal-close-button" id="closeModalButton">×</span>
-            <div class="modal-title">Complete Your Donation</div>
-            <div class="modal-qr-code">
-                <img src="images/qr-code.png" alt="Payment QR Code" onerror="this.src='https://placehold.co/250x250/FF6F00/FFFFFF?text=Scan+to+Pay'; this.alt='Placeholder QR Code'; console.error('QR code image not found at images/qr-code.png');">
-            </div>
-            <div class="modal-amount-to-pay">
-                Amount to Pay: <span id="modalAmountDisplay">₹0</span>
-            </div>
-            <div class="modal-bank-details">
-                <h4>Or Transfer Directly To:</h4>
-                <p><strong>Bank Name:</strong> Your Bank Name</p>
-                <p><strong>Account Number:</strong> Your Account Number</p>
-                <p><strong>IFSC Code:</strong> Your IFSC Code</p>
-                <p><strong>Account Holder Name:</strong> Your NGO</p>
+            <div class="modal-title">Confirm Your Donation</div>
+            
+            <div class="modal-amount-to-pay" style="margin-bottom: 1.5rem;">
+                Amount: <span id="modalAmountDisplay">₹0</span>
             </div>
             
-            <p class="text-sm text-gray-700 mb-4">Complete the payment using the QR code or bank details above.</p>
-            <button id="paymentCompleteButton" class="modal-payment-confirm-button">I have completed the payment</button>
-            <p class="text-xs text-gray-500 mt-4">Click above to receive your donation certificate.</p>
+            <p class="text-sm text-gray-700 mb-4">You will be redirected to Razorpay for a secure payment.</p>
+            <button id="paymentCompleteButton" class="modal-payment-confirm-button">Proceed to Secure Payment</button>
+            <p class="text-xs text-gray-500 mt-4">Click above to initiate payment via Razorpay.</p>
         </div>
     </div>
-
     <button id="back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
@@ -279,6 +268,7 @@
     <div id="custom-alert-box"></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
- <script src="donate.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="donate.js"></script>
 </body>
 </html>
