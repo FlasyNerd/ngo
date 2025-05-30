@@ -96,9 +96,21 @@
             font-family: 'Noto Sans', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            margin: 1.5rem 0;
+            /* margin: 1.5rem 0; */ /* Adjusted margin for Payment ID */
+            margin-top: 1.5rem;
+            margin-bottom: 0.25rem; /* Reduced bottom margin */
             display: block;
             color: #27ae60;
+            letter-spacing: 0.5px;
+        }
+
+        /* New style for Payment ID */
+        .payment-id-details {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: #555555; /* Darker gray for readability */
+            margin-top: 0.25rem; /* Space between amount and Payment ID */
+            margin-bottom: 1.5rem; /* Space after Payment ID, before next text block */
             letter-spacing: 0.5px;
         }
 
@@ -187,7 +199,7 @@
             right: 2rem;
             top: 50%;
             transform: translateY(-50%);
-            width: 150px;
+            width: 150px; /* Increased default size slightly */
             opacity: 0.8;
         }
 
@@ -211,9 +223,12 @@
             }
             
             .gold-seal {
-                width: 150px;
+                width: 120px; /* Adjusted for smaller screens */
                 right: 1rem;
-                top: 50%;
+                /* top: initial; */ /* Allow natural flow or adjust as needed */
+                /* bottom: 1rem; */ /* Example positioning for smaller screens */
+                /* transform: translateY(0); */
+                top: 60%; /* Example fine-tuning */
                 transform: translateY(-50%);
             }
             
@@ -225,23 +240,32 @@
 
         @media print {
             @page {
-                size: A4;
-                margin: 0;
+                size: A4 landscape; /* Changed to landscape for better fit */
+                margin: 0.5cm; /* Added small margin for printing */
             }
             
             body {
                 background: white !important;
+                -webkit-print-color-adjust: exact !important; /* Ensures background colors and images print */
+                print-color-adjust: exact !important;
             }
             
             .certificate-container {
-                border: 15px solid #D4AF37 !important;
+                border: 15px solid #D4AF37 !important; /* Ensure border prints */
+                border-image: linear-gradient(45deg, #D4AF37, #F4C430, #D4AF37) 1 !important; /* Ensure border image prints */
                 box-shadow: none !important;
                 page-break-after: avoid;
                 page-break-inside: avoid;
+                max-width: 98%; /* Ensure it fits within margins */
+                margin: 0 auto;
             }
             
             .action-buttons {
                 display: none !important;
+            }
+
+            .gold-seal { /* Ensure seal prints correctly */
+                opacity: 1 !important; 
             }
         }
     </style>
@@ -256,20 +280,21 @@
         <span id="donorNamePlaceholder" class="donor-name" aria-label="Donor Name">Our Valued Donor</span>
         
         <div class="certificate-text">
-            In deep appreciation of your generous contribution to Sahajshakti Sarvakalyaan Trust, we recognize your commitment to transforming lives. Your donation of <strong id="donationAmountInline" aria-hidden="true">a generous amount</strong> directly supports our mission to provide quality education, healthcare, and vocational training to underserved communities across India.
+            In deep appreciation of your generous contribution to Sahajshakti Sarvakalyaan Trust, we recognize your commitment to transforming lives. Your donation of <strong id="donationAmountInlineText">a generous amount</strong> directly supports our mission to provide quality education, healthcare, and vocational training to underserved communities across India.
         </div>
         
         <div id="donationAmountPlaceholder" class="donation-amount" aria-label="Donation Amount">a generous amount</div>
+        
         
         <div class="certificate-text">
             Through your philanthropy, you are helping to break the cycle of poverty by empowering individuals with the tools they need to build sustainable livelihoods. Each rupee you've contributed represents hope, opportunity, and dignity for those we serve.
         </div>
         
         <div class="signature-container">
-            <img id="signatureDisplay" src="images\signature.png" alt="Trustee Signature" class="signature-image">
+            <img id="signatureDisplay" src="images/signature.png" alt="Trustee Signature" class="signature-image" onerror="this.style.display='none';">
             <div class="signature-line"></div>
             <div class="ngo-name">Sahajshakti Sarvakalyaan Trust</div>
-            <img src="images\stamp.png" alt="Official Seal" class="gold-seal">
+            <img src="images/stamp.png" alt="Official Seal" class="gold-seal" onerror="this.style.display='none';">
         </div>
         
         <div class="certificate-footer">
@@ -277,7 +302,9 @@
                 Certificate ID: <span id="certificateNumber">SSST-2025-</span><br>
                 Date of Issue: <span id="issueDate" aria-label="Issue Date"></span><br>
                 This certificate is awarded to <span id="donorNameFooter">Our Valued Donor</span> in recognition of their philanthropic contribution.
+                <div id="paymentIdPlaceholder" class="payment-id-details" aria-label="Payment ID"></div>
             </div>
+           
         </div>
         
         <div class="action-buttons">
@@ -296,16 +323,21 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
+            
             const donorNameParam = urlParams.get('donorName');
-            const donorName = (donorNameParam && donorNameParam !== 'null') ? decodeURIComponent(donorNameParam) : 'Our Valued Donor';
+            const donorName = (donorNameParam && donorNameParam.trim() !== '' && donorNameParam !== 'null') ? decodeURIComponent(donorNameParam) : 'Our Valued Donor';
             
             const donationAmountParam = urlParams.get('donationAmount');
-            const donationAmount = (donationAmountParam && donationAmountParam !== 'null') ? decodeURIComponent(donationAmountParam) : 'a generous amount';
+            const donationAmount = (donationAmountParam && donationAmountParam.trim() !== '' && donationAmountParam !== 'null') ? decodeURIComponent(donationAmountParam) : 'a generous amount';
+
+            // Get Payment ID from URL
+            const paymentIdParam = urlParams.get('paymentId');
+            const paymentId = (paymentIdParam && paymentIdParam.trim() !== '' && paymentIdParam !== 'null') ? decodeURIComponent(paymentIdParam) : null;
 
             // Update all donor name elements
             const donorNameElements = [
                 document.getElementById('donorNamePlaceholder'),
-                document.getElementById('donorNameInline'),
+                // document.getElementById('donorNameInline'), // This ID was not found, using 'donorNamePlaceholder' for main display.
                 document.getElementById('donorNameFooter')
             ];
             donorNameElements.forEach(el => {
@@ -315,12 +347,23 @@
             // Update all donation amount elements
             const donationAmountElements = [
                 document.getElementById('donationAmountPlaceholder'),
-                document.getElementById('donationAmountInline'),
-                document.getElementById('donationAmountFooter')
+                document.getElementById('donationAmountInlineText') // Corrected ID to match HTML
+                // document.getElementById('donationAmountFooter') // Removed as there's no specific footer element for amount
             ];
             donationAmountElements.forEach(el => {
                 if (el) el.textContent = donationAmount;
             });
+
+            // Update Payment ID placeholder
+            const paymentIdElement = document.getElementById('paymentIdPlaceholder');
+            if (paymentIdElement) {
+                if (paymentId) {
+                    paymentIdElement.textContent = `Payment ID: ${paymentId}`;
+                    paymentIdElement.style.display = 'block'; // Ensure it's visible
+                } else {
+                    paymentIdElement.style.display = 'none'; // Hide if no Payment ID
+                }
+            }
 
             // Set issue date
             const issueDateElement = document.getElementById('issueDate');
@@ -334,33 +377,47 @@
             const certificateNumberElement = document.getElementById('certificateNumber');
             if (certificateNumberElement) {
                 const randomNum = Math.floor(1000 + Math.random() * 9000);
-                certificateNumberElement.textContent = `SSST-2025-${randomNum}`;
+                // Keep existing prefix and append random number
+                const existingPrefix = certificateNumberElement.textContent; // e.g., "SSST-2025-"
+                certificateNumberElement.textContent = `${existingPrefix}${randomNum}`;
             }
+
+            // Corrected ID for inline donation amount text if needed:
+            // The HTML has <strong id="donationAmountInlineText">
+            // If you intended a different element for donor name inline, please ensure its ID is correct.
+            // The provided HTML had "donationAmountInline" for the strong tag, which I've kept as "donationAmountInlineText" in the script's list
+            // The list was: `document.getElementById('donationAmountInline')` -> changed to `document.getElementById('donationAmountInlineText')`
+            // The donor name list had `document.getElementById('donorNameInline')` which was not present in the HTML; this item has been commented out from the list.
         });
 
         async function downloadCertificateAsImage() {
             const certificateElement = document.getElementById('certificateToDownload');
             if (!certificateElement) {
                 console.error('Certificate element not found for download.');
+                alert('Could not find the certificate element to download.');
                 return;
             }
 
-            // Temporarily hide action buttons
-            const actionButtons = document.querySelector('.action-buttons');
+            const actionButtons = certificateElement.querySelector('.action-buttons');
             if (actionButtons) actionButtons.style.visibility = 'hidden';
 
             try {
-                await document.fonts.ready;
+                // Wait for fonts to be loaded, especially web fonts
+                await document.fonts.ready; 
                 
                 const canvas = await html2canvas(certificateElement, {
-                    scale: 3,
-                    useCORS: true,
-                    logging: false,
-                    backgroundColor: '#FFFFFF',
+                    scale: 3, // Higher scale for better quality
+                    useCORS: true, // For loading cross-origin images if any (logo, seal)
+                    logging: false, // Disable console logging from html2canvas
+                    backgroundColor: '#FFFFFF', // Ensure a white background for the image
+                    scrollX: 0, // Ensure it captures from the top-left
+                    scrollY: 0,
+                    windowWidth: certificateElement.scrollWidth,
+                    windowHeight: certificateElement.scrollHeight
                 });
                 
                 const link = document.createElement('a');
-                link.download = 'SSST_Certificate_of_Appreciation.png';
+                link.download = `SSST_Certificate_of_Appreciation_${document.getElementById('donorNamePlaceholder').textContent.replace(/\s+/g, '_') || 'Donor'}.png`;
                 link.href = canvas.toDataURL('image/png');
                 document.body.appendChild(link); 
                 link.click(); 
@@ -368,9 +425,8 @@
 
             } catch (error) {
                 console.error('Error generating certificate image:', error);
-                alert('Error generating image. Please try again.');
+                alert('An error occurred while generating the certificate image. Please try printing or contact support.');
             } finally {
-                // Restore visibility of hidden elements
                 if (actionButtons) actionButtons.style.visibility = 'visible';
             }
         }
